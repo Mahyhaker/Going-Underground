@@ -1,0 +1,64 @@
+<div class="page">
+  <div class="header">
+    <div>
+      <h1>Minhas Tasks</h1>
+      <p>Organize e acompanhe suas atividades.</p>
+    </div>
+
+    <div class="header-actions">
+      <button class="primary" routerLink="/tasks/new">Nova Task</button>
+      <button class="danger" (click)="logout()">Sair</button>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <input [(ngModel)]="tituloBusca" placeholder="Buscar por título" />
+    <button class="primary" (click)="buscar()">Buscar</button>
+  </div>
+
+  <div class="filters">
+    <select [(ngModel)]="statusFiltro">
+      <option value="">Todos os status</option>
+      <option value="PENDENTE">PENDENTE</option>
+      <option value="EM_ANDAMENTO">EM_ANDAMENTO</option>
+      <option value="CONCLUIDA">CONCLUIDA</option>
+    </select>
+
+    <select [(ngModel)]="prioridadeFiltro">
+      <option value="">Todas prioridades</option>
+      <option value="BAIXA">BAIXA</option>
+      <option value="MEDIA">MEDIA</option>
+      <option value="ALTA">ALTA</option>
+    </select>
+
+    <button class="primary" (click)="filtrar()">Filtrar</button>
+    <button class="secondary" (click)="limparFiltros()">Limpar</button>
+  </div>
+
+  <div class="empty" *ngIf="tasks.length === 0">
+    Nenhuma task encontrada.
+  </div>
+
+  <div class="task-grid">
+    <div class="task-card" *ngFor="let task of tasks">
+      <div class="card-top">
+        <h3>{{ task.titulo }}</h3>
+        <span class="badge" [ngClass]="task.status.toLowerCase()">
+          {{ task.status }}
+        </span>
+      </div>
+
+      <p class="descricao">{{ task.descricao }}</p>
+
+      <div class="meta">
+        <span><strong>Prioridade:</strong> {{ task.prioridade }}</span>
+        <span><strong>Usuário:</strong> {{ task.emailUsuario }}</span>
+      </div>
+
+      <div class="actions">
+        <button class="edit" [routerLink]="['/tasks/edit', task.id]">Editar</button>
+        <button class="delete" (click)="deletar(task.id)">Excluir</button>
+      </div>
+    </div>
+  </div>
+</div>

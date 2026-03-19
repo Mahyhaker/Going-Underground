@@ -1,0 +1,51 @@
+<div class="page">
+  <div class="card">
+    <div class="title-row">
+      <div>
+        <h1>{{ taskId ? 'Editar Task' : 'Nova Task' }}</h1>
+        <p>Preencha as informações da tarefa.</p>
+      </div>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="salvar()">
+      <label for="titulo">Título</label>
+      <input
+        id="titulo"
+        type="text"
+        formControlName="titulo"
+        placeholder="Digite o título da task"
+      />
+      <small class="erro" *ngIf="form.get('titulo')?.invalid && form.get('titulo')?.touched">
+        O título é obrigatório.
+      </small>
+
+      <label for="descricao">Descrição</label>
+      <textarea
+        id="descricao"
+        formControlName="descricao"
+        placeholder="Descreva a tarefa"
+      ></textarea>
+
+      <label for="status">Status</label>
+      <select id="status" formControlName="status">
+        <option value="PENDENTE">PENDENTE</option>
+        <option value="EM_ANDAMENTO">EM_ANDAMENTO</option>
+        <option value="CONCLUIDA">CONCLUIDA</option>
+      </select>
+
+      <label for="prioridade">Prioridade</label>
+      <select id="prioridade" formControlName="prioridade">
+        <option value="BAIXA">BAIXA</option>
+        <option value="MEDIA">MEDIA</option>
+        <option value="ALTA">ALTA</option>
+      </select>
+
+      <div class="buttons">
+        <button type="button" class="secondary" routerLink="/tasks">Cancelar</button>
+        <button type="submit" class="primary">
+          {{ taskId ? 'Atualizar' : 'Salvar' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
