@@ -163,12 +163,6 @@ spring.datasource.password=123456
 
 ---
 
-## 📸 Screenshots
-
-*(adicione prints aqui depois)*
-
----
-
 ## 👨‍💻 Autor
 
 Desenvolvido por **Anthony Mahyhaker**
